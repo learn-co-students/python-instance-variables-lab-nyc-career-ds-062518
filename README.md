@@ -2,7 +2,7 @@
 # Practice with Instance Variables
 
 ## Introduction
-In this lab, we will practice using instance variables and differentiating them from local variables. We will continue with our awesome `fuber` theme. We have a couple files already provided for us, driver.py and ride.py. To get started, we need to import these files, which we have alread done below. 
+In this lab, we will practice using instance variables and differentiating them from local variables. We will continue with our awesome `fuber` theme. We have a couple files already provided for us in this directory, driver.py and ride.py. We will use these to define our classes and instance methods.
 
 ## Objectives
 
@@ -12,93 +12,156 @@ In this lab, we will practice using instance variables and differentiating them 
 
 ## Defining Instance Variables
 
-We have been writing functions and working with variables for a while now. We've talked about the difference between global variables and local variables. However, classes add another level of complexity with instance variables. Remember the difference between local and global variables is their scope. Local varibles have local or function scope, that is that they are only able to be accessed inside the function in which they are defined. Global variables can be accessed from anywhere in the file. Instance variables are bound to an instance. They can be thought of more as attributes or properties of an instance. An instance variable can only be accessed by the instance that it is bound to. 
+We have been writing functions and working with variables for a while now. We've talked about the difference between global variables and local variables. However, classes add another level of complexity with instance variables. Remember the difference between local and global variables is their scope. Local varibles have local or function scope, that is that they are only able to be accessed inside the function in which they are defined. Global variables can be accessed from anywhere in the file. Below is an example to jog your memory, if this is a little confusing:  
+
+
+```python
+name = "terrance" # global variable
+def example_function():
+    other_name = "jake" # local variable
+    
+print(name)
+print(other_name)
+```
+
+    terrance
+
+
+
+    ---------------------------------------------------------------------------
+
+    NameError                                 Traceback (most recent call last)
+
+    <ipython-input-4-177fd1439fa8> in <module>()
+          4 
+          5 print(name)
+    ----> 6 print(other_name)
+    
+
+    NameError: name 'other_name' is not defined
+
+
+Again, our local variable is bound to its local or function scope, so when we try to print its value outside of the function it is undefined. This brings us to instance variables. They act similarly in that they are bound to their instance.
 
 ## Okay, but Why Do We Need Instance Variables?
 
-Let's imagine we have a driver, `alex`, who has an attribute called `name`. If we wanted to query that attribute, we would only want to recieve the `name` attribute from the driver instance, `alex`. Let's see how we would set something like this up with local variables alone:
+Let's imagine we have two drivers. We istantiate them as instances of the `ExampleDriver` class and assign them to variables, `driver_one` and `driver_two`. Let's see this:
 
 
 ```python
 class ExampleDriver:
+    pass
+    
+driver_one = ExampleDriver()
+driver_two = ExampleDriver()
+print(driver_one)
+print(driver_two)
+```
+
+    <__main__.ExampleDriver object at 0x10f3aa588>
+    <__main__.ExampleDriver object at 0x10f3aa630>
+
+
+Notice anything? Pretty hard to tell who is who... How can we fix this? We could probably give them names, right? That's where instance variables come in. Instance variables can be thought of as an attribute on an object. So, if we want our instance objects to have a `name` attribute, we simply need to add it to the object.
+
+
+```python
+driver_one.name = 'alex'
+print(driver_one.name)
+```
+
+    alex
+
+
+Great! We have made our first instance variable and we can now start to differentiate our instance objects and make them a bit more interesting. To reiterate, adding an attribute like `name` to an instance object is done by simply using the syntax, `variable-dot-attribute = value`. Let's add driver_two's name now, let's name them 'julian'.
+
+
+```python
+# add name to driver_two
+```
+
+Now, we can imagine these instance objects getting quite complex and we will want a way to look at the attributes -- similar to how we want to be able to look at the keys in a dictionary. Luckily for us, there is a method that shows us just that! `vars` is a method that returns a dictionary containing the keys and values that represent the attributes and values of an instance object. Let's see it in action:
+
+
+```python
+vars(driver_two)
+```
+
+
+
+
+    {'name': 'julian'}
+
+
+
+Since `vars` returns a dictionary, we can even go a step further and just look at the attributes without their associated values by calling the `keys` method.
+
+
+```python
+vars(driver_two).keys()
+```
+
+
+
+
+    dict_keys(['name'])
+
+
+
+Now, that we know how to add attributes as instance variables to our instance objects, let's look at how we would add an instance method as an attribute for our instance objects.
+
+
+```python
+class Person:
+    def say_hello():
+        print("Hi! How are you today?")
         
-    def set_name(self, new_name):
-        name = new_name
-        return name
+jeff = Person()
+```
+
+Okay, here we have defined an instance method called `say_hello` and an instance assinged to the variable, `jeff`. Let's try to call this method on our instance object, `jeff`: 
+
+
+```python
+jeff.say_hello()
+```
+
+
+    ---------------------------------------------------------------------------
+
+    TypeError                                 Traceback (most recent call last)
+
+    <ipython-input-42-7ebd56e95aec> in <module>()
+    ----> 1 jeff.say_hello()
     
-    def get_name(self):
-        return name
-    
-example_alex = ExampleDriver()
-```
 
-Cool, no errors and it looks pretty straightforward. Let's try it out. First we'll give the `name` a value with `set_name`:
+    TypeError: say_hello() takes 0 positional arguments but 1 was given
 
 
-```python
-example_alex.set_name('Alex')
-```
+Oh no! We got an error... :( 
 
-
-
-
-    'Alex'
-
-
-
-Alright, so we can assign the variable with our string and then return the variable successfully. Let's try just querying the name now that we've assigned it a value.
+`TypeError: say_hello() takes 0 positional arguments but 1 was given` as we can see we defined our method to not recieve any arguments. However, Python uses the instance object, `jeff` as the first argument of the instance method `say_hello`. So, this means Python is trying to pass in an argument into our method, but our method does not allow for any arguments. Don't worry about this behavior just yet, we can just define our instance method to take an argument and everything should work fine.
 
 
 ```python
-example_alex.get_name()
+class Person2:
+    def say_hello(argument):
+        print("Hi! How are you today?")
+        
+jeff2 = Person2()
 ```
 
-
-
-
-    'Alex'
-
-
-
-Oh no! `NameError: name 'name' is not defined` --  what does this mean?
-
-As the error states, the `'name'` variable is undefined in this method. We defined name in local scope, so, now that we are in another function it is undefined. We could change things a bit to get this class to use a global variable for `name`, but then we can see that as soon as we create a new driver and reassign the global variable, we would have lost the name of the previous driver, `alex`. Don't worry too much about that right now. The key take away is that we are only able to define instance variables as attributes of an instance and we need to have the instance in scope to access its variables or attributes.
-
-## Putting Instance Variables to the Test
-
-It seems natural that a driver would have an attribute of `distance_driven` and that this attribute would be present at the start of one's professional driving career. So, let's add that to our `__init__` instance method in the `Driver` class and initialize it with a value of `0`. Next, we'll need a way for us to access and change this value. So let's define instance methods to accomplish both of these tasks, we'll call these methods `get_distance`, which will return the driver's `distance_driven`, and `set_distance`, which will take in a distance and add it to the driver's `distance_driven` attribute and finally return the updated `distance_driven`. 
+Alright, round 2. Let's try this instance method again.
 
 
 ```python
-from driver import Driver
+jeff2.say_hello()
 ```
 
-Let's instantiate a new driver and assign it to the varible `alex`. Next get the initial `distance_driven`, which should be `0` and assign it to `initial_distance`.
+    Hi! How are you today?
 
 
-```python
-alex = Driver()
-```
-
-
-```python
-initial_distance = alex.get_distance()
-print(initial_distance)
-```
-
-    0
-
-
-Great! we now have a driver and their initial distance driven. Let's take a 5 mile ride with `alex`. To do this, we need to call the `set_distance` method on `alex` and pass in an argument of `5`. Let's assign the return value of this operation to the variable, `new_dist`.
-
-
-```python
-new_dist = alex.set_distance(5)
-print(new_dist)
-```
-
-    10
-
+Awesome! It worked. Again, we'll come back to exaclty what that `argument` is later. 
 
 ## Summary
-In this lab we learned how to differentiate between instance and local variables. Then we saw the reason we need to use instance variables when we are assigning or operating on an attribute of an instance object. Finally we practiced using instance methods to read and re-assign the values of our instance variables.
+In this lesson we saw how to define instance variables and saw how to use them in order to give our instance objects attributes and added complexity. We then saw how to define instance methods and call them on our instance objects. 
