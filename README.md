@@ -2,7 +2,7 @@
 # Practice with Instance Variables
 
 ## Introduction
-In this lab, we will practice using instance variables. We will continue with our awesome `fuber` theme. In this directory, we have a couple files already provided for us, driver.py and passenger.py. We will use these to define our classes and instance methods.
+In this lab, we will practice using instance variables, and continue with our awesome `fuber` theme. In this directory, we have a couple files already provided for us, driver.py and passenger.py. We will use these to define our classes and instance methods.
 
 ## Objectives
 
@@ -25,9 +25,9 @@ print(name) # printing global variable
 print(other_name) # printing local variable
 ```
 
-Again, our local variable is bound to its local or function scope, so when we try to print its value outside of the function it is undefined. This brings us to instance variables. They act similarly in that they are bound to their instance. This means we define instance variables **on** instance objects. These instance variables are then only accessible through the instance on which it was defined.
+Again, our local variable is bound to its local or function scope, so when we try to print its value outside of the function it is undefined. This brings us to instance variables. They act similarly in that they are bound to their instance. This means we define instance variables **on** instance objects. These instance variables are then only accessible through the instance on which they were defined.
 
-The following is an example of adding an instance variable to an instance object and then accessing it later. Don't worry if it is confusing, we will explain what is happening below later in the lesson.
+The following is an example of adding an instance variable to an instance object and then accessing it later. Don't worry if it is confusing right now, the rest of this lesson will clear things up.
 
 
 ```python
@@ -40,7 +40,7 @@ print(terrance.first_name) # printing instance variable accessed from the instan
 print(first_name) # undefined since it is not being accessed from the instance
 ```
 
-## Okay, but Why Do We Need Instance Variables?
+## Okay, But Why Do We Need Instance Variables?
 
 Let's imagine we have two drivers. We istantiate them as instances of the `ExampleDriver` class and assign them to variables, `driver_one` and `driver_two`. Let's see this:
 
@@ -55,7 +55,9 @@ print(driver_one)
 print(driver_two)
 ```
 
-Notice anything? Pretty hard to tell who is who... How can we fix this? We could probably give them names, right? That's where instance variables come in. Instance variables can be thought of as an attribute on an object. So, if we want our instance objects to have a `name` attribute, we simply need to add it to the object.
+Notice anything? Pretty hard to tell who is who... How can we fix this? We could probably give them names, right? Well, how do we assign a name to these instances?
+
+That's where instance variables come in. Instance variables can be thought of as an attribute on an object. So, if we want our instance objects to have a `name` attribute, we simply need to add it to the object.
 
 
 ```python
@@ -198,7 +200,7 @@ Your output should look like `['alex', 'michelle', 'jake', 'ashleigh']`.
 names_of_passengers = None # assign the return of best_driver.passenger_names()
 ```
 
-If you would like to see a more formatted list, plug in the names_of_passengers into the function below:
+If you would like to see a more formatted list, try calling the method below on the best_driver instance:
 
 
 ```python
