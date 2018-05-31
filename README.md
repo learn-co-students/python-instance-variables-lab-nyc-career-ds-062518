@@ -42,7 +42,7 @@ print(first_name) # undefined since it is not being accessed from the instance
 
 ## Okay, But Why Do We Need Instance Variables?
 
-Let's imagine we have two drivers. We istantiate them as instances of the `ExampleDriver` class and assign them to variables, `driver_one` and `driver_two`. Let's see this:
+Let's imagine we have two drivers. We instantiate them as instances of the `ExampleDriver` class and assign them to variables, `driver_one` and `driver_two`. Let's see this:
 
 
 ```python
@@ -76,7 +76,7 @@ Now, we can imagine wanting to add many instance variables to these instance obj
 
 `vars` is a method that returns a dictionary containing the keys and values that represent the instance variable names and values of an instance object. Let's see it in action:
 
-> **Note:** instance variables and instance methods can both be referred to as `attributes` of an instance object. 
+> **Note:** instance variables and instance methods both can be referred to as `attributes` of an instance object. 
 
 
 ```python
@@ -114,8 +114,8 @@ Remember how we said that there were a couple files provided for us? Let's put t
 
 
 ```python
-from driver.py import Driver
-from passenger.py import Passenger
+from driver import Driver
+from passenger import Passenger
 ```
 
 Now let's instantiate a new instance of a passenger and a new instance of a driver. Give the passenger a `rating` of `4.9` and give the driver a `miles_driven` attribute of `100,000`.
@@ -128,7 +128,7 @@ passenger = None # assign the passenger instance
 # give the passenger instance object a 'rating' of 4.9
 ```
 
-Say we wanted to find a driver with a given name -- how would we do that? Let's take a look at how we could write a function that would take in a list of instance objects and return the one with the desired name. That sounds like the functionality we want.
+Say we wanted to find a driver with a given name -- how would we do that? Let's take a look at how we could write a function that would take in a list of instance objects and return the one with the desired name.
 
 
 ```python
@@ -149,8 +149,9 @@ jake_driver = Driver()
 jake_driver.name = "jake"
 ashleigh_driver = Driver()
 ashleigh_driver.name = "ashleigh"
-list_of_drivers = [alex_driver, michelle_driver, jake_driver]
+list_of_drivers = [alex_driver, michelle_driver, jake_driver, ashleigh_driver]
 print(find_driver_by_name(list_of_drivers, "jake"))
+print(find_driver_by_name(list_of_drivers, "michelle"))
 print(find_driver_by_name(list_of_drivers, "allison"))
 ```
 
