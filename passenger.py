@@ -1,1 +1,4 @@
-# define passenger class here
+class Passenger:
+    pass
+
+        # define passenger class here
