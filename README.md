@@ -16,21 +16,27 @@ Below, define classes for both a Driver and a Passenger -- for now just define t
 
 ```python
 # Driver class
+class Driver:
+    pass
 ```
 
 
 ```python
 # Passenger class
+class Passenger:
+    pass
 ```
 
 Now let's instantiate a new instance of a passenger and a new instance of a driver. Give the passenger a `rating` of `4.9` and give the driver a `miles_driven` attribute of `100,000`.
 
 
 ```python
-driver = None # assign a driver instance
+driver = Driver() # assign a driver instance
 # give the driver instance object 'miles_driven' of 100000
-passenger = None # assign the passenger instance
+driver.miles_driven = 100000
+passenger = Passenger() # assign the passenger instance
 # give the passenger instance object a 'rating' of 4.9
+passenger.rating = 4.9
 ```
 
 Say we wanted to find a driver with a given name -- how would we do that? Well, we could define a function that takes in a list of driver instance objects and the name we are searching for. We'll have to check each driver instance for their name and see if it matches the one given.
@@ -64,7 +70,10 @@ print(find_driver_by_name(list_of_drivers, "allison"))
 ```python
 def find_driver_by_name(drivers, name):
     # write your code here
-    pass
+    for driver in drivers:
+        if driver.name == name:
+            return driver
+    return f"Sorry we couldn't find a driver with the name, {name}! :("        
 ```
 
 Cool! That looks like it worked. We can see that the method returns the Driver instance object when it finds an instance with the given name and returns a message saying that driver does not exist, if it cannot find a driver with that name. Now try writing a method that will return a list of instance objects that start with a given substring like the letter `'a'`.
@@ -74,7 +83,7 @@ Cool! That looks like it worked. We can see that the method returns the Driver i
 # write your method here that returns the list of 
 # drivers whose name starts which the letter 'a'
 def name_starts_with(drivers, substring):
-    pass
+    return [driver for driver in drivers if driver.startswith(subtstring)]
 ```
 
 Next, let's use our list of drivers to define a method that returns the driver with the highest rating.
@@ -83,7 +92,11 @@ Next, let's use our list of drivers to define a method that returns the driver w
 ```python
 # write your method here that returns the driver with the highest rating
 def highest_rated_driver(drivers):
-    pass
+    highest_rated = drivers[0]
+    for driver in drivers:
+        if driver.rating > highest_rated.rating:
+            highest_rated = driver
+    return highest_rated
 ```
 
 ## Summary
