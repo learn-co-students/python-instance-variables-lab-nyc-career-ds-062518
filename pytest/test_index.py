@@ -23,10 +23,13 @@ def test_find_driver_by_name_func():
     assert find_driver_by_name(list_of_drivers, 'ashleigh') == ashleigh_driver
     assert find_driver_by_name(list_of_drivers, 'Aziz') == "Sorry we couldn't find a driver with the name, Aziz! :("
 
+def sort_lists_by_name(list):
+    return sorted(name_starts_with(list_of_drivers, 'a'), key=lambda driver: driver.name)
+
 def test_name_starts_with():
-    assert all([a == b for a, b in (name_starts_with(list_of_drivers, 'a'), [alex_driver, ashleigh_driver])])
-    assert all([a == b for a, b in (name_starts_with(list_of_drivers, 'al'), [alex_driver])])
-    assert all([a == b for a, b in (name_starts_with(list_of_drivers, 'az'), [])])
+    assert sort_lists_by_name(name_starts_with(list_of_drivers, 'a')) == [alex_driver, ashleigh_driver]
+    assert name_starts_with(list_of_drivers, 'al') == [alex_driver]
+    assert name_starts_with(list_of_drivers, 'az') == []
 
 def create_jack_driver_instance():
     jack_driver = Driver()
@@ -35,5 +38,6 @@ def create_jack_driver_instance():
     return jack_driver
 
 def test_highest_rated_driver():
-    list_of_drivers.append(create_jack_driver_instance())
-    assert highest_rated_driver(list_of_drivers) is jack_driver
+    jack = create_jack_driver_instance()
+    list_of_drivers.append(jack)
+    assert highest_rated_driver(list_of_drivers) is jack
