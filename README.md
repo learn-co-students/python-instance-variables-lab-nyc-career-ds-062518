@@ -42,13 +42,6 @@ If there are no drivers with the name we are searching, our function should retu
 
 
 ```python
-def find_driver_by_name(list_drivers, name):
-    # write your code here
-    pass
-```
-
-
-```python
 alex_driver = Driver()
 alex_driver.name = "alex"
 alex_driver.rating = 9.0
@@ -65,6 +58,13 @@ list_of_drivers = [alex_driver, michelle_driver, jake_driver, ashleigh_driver]
 print(find_driver_by_name(list_of_drivers, "jake"))
 print(find_driver_by_name(list_of_drivers, "michelle"))
 print(find_driver_by_name(list_of_drivers, "allison"))
+```
+
+
+```python
+def find_driver_by_name(drivers, name):
+    # write your code here
+    pass
 ```
 
 Cool! That looks like it worked. We can see that the method returns the Driver instance object when it finds an instance with the given name and returns a message saying that driver does not exist, if it cannot find a driver with that name. Now try writing a method that will return a list of instance objects that start with a given substring like the letter `'a'`.
