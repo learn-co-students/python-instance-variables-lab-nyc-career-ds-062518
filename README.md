@@ -87,7 +87,7 @@ Cool! That looks like it worked. We can see that the method returns the Driver i
 # write your method here that returns the list of 
 # drivers whose name starts which the letter 'a'
 def name_starts_with(drivers, substring):
-    return [driver for driver in drivers if driver.startswith(subtstring)]
+    return [driver for driver in drivers if driver.name.startswith(substring)]
 ```
 
 Next, let's use our list of drivers to define a method that returns the driver with the highest rating.

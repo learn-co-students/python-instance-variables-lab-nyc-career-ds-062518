@@ -1,1 +1,7 @@
-[]
+[
+  "pytest/test_index.py::test_classes",
+  "pytest/test_index.py::test_instances",
+  "pytest/test_index.py::test_find_driver_by_name_func",
+  "pytest/test_index.py::test_name_starts_with",
+  "pytest/test_index.py::test_highest_rated_driver"
+]
